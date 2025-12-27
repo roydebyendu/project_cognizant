@@ -1,0 +1,40 @@
+@echo off
+echo Starting Patient Record Management System...
+echo.
+
+echo Starting Discovery Service...
+start "Discovery Service" cmd /k "cd discovery-service && mvn spring-boot:run"
+timeout /t 30 /nobreak
+
+echo Starting API Gateway...
+start "API Gateway" cmd /k "cd api-gateway && mvn spring-boot:run"
+timeout /t 10 /nobreak
+
+echo Starting Patient Service...
+start "Patient Service" cmd /k "cd patient-service && mvn spring-boot:run"
+timeout /t 5 /nobreak
+
+echo Starting Doctor Service...
+start "Doctor Service" cmd /k "cd doctor-service && mvn spring-boot:run"
+timeout /t 5 /nobreak
+
+echo Starting Appointment Service...
+start "Appointment Service" cmd /k "cd appointment-service && mvn spring-boot:run"
+timeout /t 5 /nobreak
+
+echo Starting Web Frontend...
+start "Web Frontend" cmd /k "cd web-frontend && mvn spring-boot:run"
+timeout /t 5 /nobreak
+
+echo "All services are starting up. Please wait for all services to be ready."
+echo "Service URLs:"
+echo "- Discovery Service: http://localhost:8761"
+echo "- API Gateway: http://localhost:8080"
+echo "- Patient Service: http://localhost:8081"
+echo "- Doctor Service: http://localhost:8082"
+echo "- Appointment Service: http://localhost:8083"
+echo "- Web Frontend: http://localhost:9090"
+echo Wait for all services to start before testing APIs.
+pause
+
+pause
